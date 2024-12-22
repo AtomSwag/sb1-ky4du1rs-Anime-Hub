@@ -1,0 +1,47 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+Page {
+    background-color: #1a1a1a;
+}
+
+ActionBar {
+    background-color: #1a1a1a;
+    color: white;
+}
+
+.anime-card {
+    position: relative;
+}
+
+.info-overlay {
+    background-color: rgba(0, 0, 0, 0.7);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.category-card {
+    width: 45%;
+}
+
+SearchBar {
+    background-color: #2d2d2d;
+    color: white;
+}
+
+TabView {
+    selected-tab-text-color: #6366f1;
+    android-selected-tab-highlight-color: #6366f1;
+}
+
+.tab-item {
+    color: #9ca3af;
+}
+
+.tab-item-active {
+    color: #6366f1;
+    font-weight: bold;
+}

@@ -1,0 +1,57 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" navigatingTo="onNavigatingTo">
+    <ActionBar title="Anime Hub">
+        <ActionBar.titleView>
+            <Label text="Anime Hub" class="text-xl font-bold text-white" />
+        </ActionBar.titleView>
+        <NavigationButton visibility="collapsed" />
+        <ActionBar.actionItems>
+            <ActionItem ios.position="right" android.position="actionBar">
+                <ActionItem.actionView>
+                    <Image src="~/assets/images/logo.png" width="40" height="40" class="rounded-full" />
+                </ActionItem.actionView>
+            </ActionItem>
+        </ActionBar.actionItems>
+    </ActionBar>
+    
+    <GridLayout rows="auto, *">
+        <SearchBar hint="Search anime..." submit="{{ onSearch }}" 
+            class="bg-gray-800 text-white" row="0" />
+            
+        <TabView selectedTabTextColor="#6366f1" row="1" class="bg-gray-900">
+            <TabViewItem title="Popular">
+                <GridLayout>
+                    <ListView items="{{ popularAnime }}" itemTap="{{ onAnimeTap }}" 
+                        class="bg-gray-900">
+                        <ListView.itemTemplate>
+                            <GridLayout class="anime-card">
+                                <Image src="{{ images.jpg.large_image_url }}" stretch="aspectFill" 
+                                    height="200" />
+                                <StackLayout class="info-overlay p-2">
+                                    <Label text="{{ title }}" class="text-lg font-bold text-white" 
+                                        textWrap="true" />
+                                    <Label text="{{ genres[0].name }}" class="text-sm text-gray-300" />
+                                    <Label text="{{ score }} ★" class="text-yellow-400 font-bold" />
+                                </StackLayout>
+                            </GridLayout>
+                        </ListView.itemTemplate>
+                    </ListView>
+                    <ActivityIndicator busy="{{ isLoading }}" />
+                </GridLayout>
+            </TabViewItem>
+            
+            <TabViewItem title="Categories">
+                <ScrollView class="bg-gray-900">
+                    <WrapLayout>
+                        <Repeater items="{{ categories }}">
+                            <Repeater.itemTemplate>
+                                <StackLayout class="category-card m-2 p-4 bg-indigo-600 rounded-lg">
+                                    <Label text="{{ name }}" class="text-white font-bold" />
+                                </StackLayout>
+                            </Repeater.itemTemplate>
+                        </Repeater>
+                    </WrapLayout>
+                </ScrollView>
+            </TabViewItem>
+        </TabView>
+    </GridLayout>
+</Page>

@@ -1,0 +1,10 @@
+<GridLayout rows="auto, auto" columns="*" class="anime-card m-2 bg-gray-900 rounded-lg overflow-hidden">
+    <Image src="{{ images.jpg.large_image_url }}" stretch="aspectFill" height="200" row="0" />
+    <StackLayout row="1" class="p-3">
+        <Label text="{{ title }}" class="text-lg font-bold text-white" textWrap="true" />
+        <GridLayout columns="auto, *" class="mt-1">
+            <Label text="{{ score }}" class="text-yellow-400 font-bold" col="0" />
+            <Label text="{{ episodes }} episodes" class="text-gray-400 text-right" col="1" />
+        </GridLayout>
+    </StackLayout>
+</GridLayout>

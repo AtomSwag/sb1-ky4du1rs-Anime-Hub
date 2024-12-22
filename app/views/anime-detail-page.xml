@@ -1,0 +1,59 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" navigatingTo="onNavigatingTo">
+    <ActionBar>
+        <NavigationButton tap="{{ onBackButtonTap }}" android.systemIcon="ic_menu_back" />
+        <Label text="{{ anime.title }}" class="text-lg font-bold text-white" textWrap="true" />
+    </ActionBar>
+
+    <ScrollView class="bg-gray-900">
+        <StackLayout>
+            <Image src="{{ anime.images.jpg.large_image_url }}" stretch="aspectFill" height="300" />
+            
+            <!-- Video Player Section -->
+            <GridLayout rows="auto" columns="*" class="m-4" visibility="{{ hasEpisodes ? 'visible' : 'collapsed' }}">
+                <VideoPlayer src="{{ currentEpisodeUrl }}" 
+                    controls="true" 
+                    height="200"
+                    autoplay="false" />
+            </GridLayout>
+
+            <!-- Quality Selection -->
+            <GridLayout rows="auto" columns="*, *, *" class="m-4" visibility="{{ hasEpisodes ? 'visible' : 'collapsed' }}">
+                <Button text="720p" tap="{{ selectQuality }}" quality="720" class="{{ selectedQuality === '720' ? 'bg-indigo-600' : 'bg-gray-700' }} text-white" col="0" />
+                <Button text="1080p" tap="{{ selectQuality }}" quality="1080" class="{{ selectedQuality === '1080' ? 'bg-indigo-600' : 'bg-gray-700' }} text-white" col="1" />
+                <Button text="4K" tap="{{ selectQuality }}" quality="4k" class="{{ selectedQuality === '4k' ? 'bg-indigo-600' : 'bg-gray-700' }} text-white" col="2" />
+            </GridLayout>
+
+            <!-- Anime Details -->
+            <StackLayout class="p-4">
+                <Label text="{{ anime.title }}" class="text-2xl font-bold text-white mb-2" textWrap="true" />
+                <GridLayout columns="auto, *" class="mb-4">
+                    <Label text="{{ anime.score }}" class="text-xl text-yellow-400 font-bold" col="0" />
+                    <Label text="{{ anime.status }}" class="text-gray-400 text-right" col="1" />
+                </GridLayout>
+
+                <WrapLayout class="mb-4">
+                    <Repeater items="{{ anime.genres }}">
+                        <Repeater.itemTemplate>
+                            <Label text="{{ name }}" class="m-1 p-2 bg-indigo-600 rounded-full text-white text-sm" />
+                        </Repeater.itemTemplate>
+                    </Repeater>
+                </WrapLayout>
+
+                <Label text="{{ anime.synopsis }}" class="text-gray-300" textWrap="true" />
+
+                <!-- Episodes List -->
+                <Label text="Episodes" class="text-xl font-bold text-white mt-4 mb-2" 
+                    visibility="{{ hasEpisodes ? 'visible' : 'collapsed' }}" />
+                <ListView items="{{ episodes }}" itemTap="{{ onEpisodeTap }}" height="300"
+                    visibility="{{ hasEpisodes ? 'visible' : 'collapsed' }}">
+                    <ListView.itemTemplate>
+                        <GridLayout columns="auto, *" class="p-2 border-b border-gray-800">
+                            <Label text="{{ number }}" class="text-gray-400 mr-2" col="0" />
+                            <Label text="{{ title }}" class="text-white" col="1" textWrap="true" />
+                        </GridLayout>
+                    </ListView.itemTemplate>
+                </ListView>
+            </StackLayout>
+        </StackLayout>
+    </ScrollView>
+</Page>
